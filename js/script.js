@@ -73,6 +73,7 @@ function cellClicked(elCell, i, j) {
     //clickedBtnStyle(currcell, htmlCell)
 
     if (gGame.isOn === false) {
+        currCell.isShown = true
         makeMines()
         setMinesNegsCount(gBoard)
     }
@@ -84,8 +85,8 @@ function cellClicked(elCell, i, j) {
         //     var mineNum = checkNeighbors(gBoard, htmlCell)
         //     currcell.minesAroundCount = mineNum
         // }
-    }else {
-        expandShown(gBoard,i,j)
+    } else {
+        expandShown(gBoard, i, j)
     }
     currCell.isShown = true
     renderBoard(gBoard)
@@ -126,16 +127,6 @@ function setMinesNegsCount(board) {
             board[i][j].minesAroundCount = mainesCount
         }
     }
-    mainesCount = 0
-
-    for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
-        if (i < 0 || i >= board.length) continue
-        for (var j = colIdx - 1; j <= colIdx + 1; j++) {
-            if (i === rowIdx && j === colIdx) continue
-            if (j < 0 || j >= board[0].length) continue
-            if (gBoard[i][j].isMine === true) mainesCount++
-        }
-    }
     return mainesCount
 
 }
@@ -143,8 +134,16 @@ function setMinesNegsCount(board) {
 function expandShown(board, i, j) {
     var rowIdx = i
     var colIdx = j
-    for (var x = rowIdx - 1; x <= rowIdx + 1; x++) {
-        for (var y = colIdx - 1; y <= colIdx + 1; y++) {
+    for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
+
+        if (i < 0 || i >= board.length) continue
+
+        for (var j = colIdx - 1; j <= colIdx + 1; j++) {
+            if (i === rowIdx && j === colIdx) continue
+            if (j < 0 || j >= board[0].length) continue
+
+            if (board[i][j].minesAroundCount > 0) continue
+            if (board[i][j].isMine) continue
             board[i][j].isShown = true
         }
     }
