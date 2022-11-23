@@ -1,11 +1,13 @@
 body{
     margin: 0px;
-    background-color: rgb(233, 153, 153);
+    background-color:rgb(151, 74, 74);
 }
 table{
     background-color: #a9a9a9;
+    border: 2px solid black;
     margin: auto;
     cursor: pointer;
+    box-shadow: 10px 10px;
 }
 
 td{
@@ -48,4 +50,8 @@ td{
     bottom:0px;
     width: 100%;
     height:50px;
+}
+
+.levelbut{
+    border: 1px solid red;
 }
