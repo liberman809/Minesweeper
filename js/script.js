@@ -142,7 +142,7 @@ function expandShown(board, i, j) {
             if (i === rowIdx && j === colIdx) continue
             if (j < 0 || j >= board[0].length) continue
 
-            if (board[i][j].minesAroundCount > 0) continue
+            //if (board[i][j].minesAroundCount > 0) continue
             if (board[i][j].isMine) continue
             board[i][j].isShown = true
         }
