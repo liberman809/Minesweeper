@@ -1,0 +1,39 @@
+table{
+    background-color: #a9a9a9;
+    margin: auto;
+    cursor: pointer;
+}
+
+td{
+    border: 1px solid;
+}
+
+.cell{
+    background-color: lightgray;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    
+}
+.cell:hover {
+    background-color: lightblue;
+}
+
+.cellclicked{
+    background-color: darkgray;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+}
+
+.board{
+    margin: auto;
+    margin-top: 20px;
+}
+
+.buttons{
+    margin: auto;
+    margin-top: 30px;
+    text-align: center;
+    width: 145px;
+}
