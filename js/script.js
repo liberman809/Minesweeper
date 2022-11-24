@@ -3,7 +3,7 @@
 var elBoard = document.querySelector('.board')
 var gBoard = []
 
-
+document.addEventListener("contextmenu", e => e.preventDefault());
 
 var gLevel = { SIZE: 0, MINES: 0 };
 
@@ -54,10 +54,16 @@ function renderBoard(board) {
 function renderCell(i, j) {
     var html = ''
     if (gBoard[i][j].isShown === false) {
-        html += `<td><div class="cell cell${i}${j}" data-i = ${i} data-j= ${j} onclick="cellClicked(this,${i}, ${j})"></div> </td>`
+        if(gBoard[i][j].isMarked === false){
+            html += `<td><div class="cell" oncontextmenu="cellMarked(${i}, ${j})" data-i = ${i} data-j= ${j} onclick="cellClicked(this,${i}, ${j})"></div> </td>`
+        }else{
+            html += `<td><div class="cell" oncontextmenu="cellMarked(${i}, ${j})" data-i = ${i} data-j= ${j} onclick="cellClicked(this,${i}, ${j})">🚩</div> </td>`
+
+        }
+            
     } else {
         if (gBoard[i][j].isMine === true) {
-            html += `<td><div class="cell cell-maine cell${i}${j} " data-i = ${i} data-j= ${j} onclick="cellClicked(this,${i}, ${j})">💣</div> </td>`
+            html += `<td><div class="cell cell-maine"  data-i = ${i} data-j= ${j} onclick="cellClicked(this,${i}, ${j})">💣</div> </td>`
         } else {
             if (gBoard[i][j].minesAroundCount === 0) {
                 html += `<td><div class="cell cellclicked cell${i}${j} " data-i = ${i} data-j= ${j} onclick="cellClicked(this,${i}, ${j})"></div> </td>`
@@ -72,16 +78,15 @@ function renderCell(i, j) {
 }
 
 function cellClicked(cell,i, j) {
-    var currCell = gBoard[i][j]
     
+    document.addEventListener("contextmenu", e => e.preventDefault());
 
+    
+    var currCell = gBoard[i][j]
     checkGameOver()
     if(gGame.gameOver === true){
         return
     }
-
-   
-  
 
     if (gGame.isOn === false) {
         currCell.isShown = true
@@ -144,22 +149,20 @@ function setMinesNegsCount(board) {
 function expandShown(board, i, j) {
     var rowIdx = i
     var colIdx = j
-    for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
+    if(gBoard[i][j].minesAroundCount === 0){
+        for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
 
-        if (i < 0 || i >= board.length) continue
-
-        for (var j = colIdx - 1; j <= colIdx + 1; j++) {
-
-            if (i === rowIdx && j === colIdx) continue
-            if (j < 0 || j >= board[0].length) continue
-
-            if (gBoard[i][j].isMine){
-                continue
-            }else{
-                if(gBoard[i][j].minesAroundCount === 0){
-                    gBoard[i][j].isShown = true
+            if (i < 0 || i >= board.length) continue
+    
+            for (var j = colIdx - 1; j <= colIdx + 1; j++) {
+    
+                if (i === rowIdx && j === colIdx) continue
+                if (j < 0 || j >= board[0].length) continue
+    
+                if (gBoard[i][j].isMine){
+                    continue
                 }else{
-                    return
+                    gBoard[i][j].isShown = true
                 }
             }
         }
@@ -198,5 +201,10 @@ function lives(){
         elLives.style.color = "black"
     }
     elLives.innerText = hearts
+}
+
+function cellMarked(i,j){
+    gBoard[i][j].isMarked = true
+    renderBoard(gBoard)
 }
 
