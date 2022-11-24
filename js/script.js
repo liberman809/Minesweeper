@@ -11,7 +11,8 @@ var gGame = {Lives: 3, isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0
 
 function onInit(SIZE, MINES) {
     var elImjBtn = document.querySelector('.emoji')
-
+    gGame.Lives =3
+    gGame.isOn = false
     gLevel.SIZE = SIZE
     gLevel.MINES = MINES
     elImjBtn.innerText ='😃'
@@ -168,7 +169,6 @@ function expandShown(board, i, j) {
 function checkGameOver() {
     console.log(gGame.shownCount)
     var elImjBtn = document.querySelector('.emoji')
-    var elHearts = document.querySelector('.hearts')
 
     if (gGame.shownCount === gLevel.SIZE * gLevel.SIZE - gGame.markedCount && gGame.markedCount === gLevel.MINES) {
         elImjBtn.innerText = '😎'
