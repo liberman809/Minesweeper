@@ -13,6 +13,7 @@ function onInit(SIZE, MINES) {
     
     gLevel.SIZE = SIZE
     gLevel.MINES = MINES
+    elImjBtn.innerText ='😃'
     buildBoard()
 }
 
