@@ -32,9 +32,17 @@ td{
     text-align: center;
 }
 
+.cell-maine{
+    background-color: red;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    
+}
+
 .board{
     margin: auto;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .buttons{
@@ -54,4 +62,34 @@ td{
 
 .levelbut{
     border: 1px solid red;
+}
+
+.winner{
+    position: relative;
+    background-color: black;
+}
+
+.livesImj{
+    margin: auto;
+    text-align: center;
+    margin-top: 20px;
+    width: 40px;
+    height: 30px;
+    margin-bottom: 20PX;
+}
+.emoji {
+    font-size: 30px;
+    vertical-align: middle;
+    line-height: 2;
+    cursor: pointer;
+    margin-bottom: 20PX;
+}
+
+.lives{
+    color: red;
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
+    width: 165px;
+    font-size: 30px;
 }

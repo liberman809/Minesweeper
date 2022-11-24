@@ -7,15 +7,18 @@ var gBoard = []
 
 var gLevel = { SIZE: 0, MINES: 0 };
 
-var gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 }
+var gGame = { gameOver: false, Lives: 3, isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 }
 
 function onInit(SIZE, MINES) {
-    console.log('init')
-    gGame.isOn = false
+    if(gGame.gameOver){
+        return
+    }else{
+        gGame.isOn = false
     gLevel.SIZE = SIZE
     gLevel.MINES = MINES
     buildBoard()
-
+    }
+    
 }
 
 function buildBoard() {
@@ -43,6 +46,7 @@ function renderBoard(board) {
         strHtml += '</tr>'
     }
     strHtml += '</table>'
+    lives()
     elBoard.innerHTML = strHtml
     console.log(gBoard)
 }
@@ -50,16 +54,16 @@ function renderBoard(board) {
 function renderCell(i, j) {
     var html = ''
     if (gBoard[i][j].isShown === false) {
-        html += `<td><div class="cell " data-i = ${i} data-j= ${j} onclick="cellClicked(this,${i}, ${j})"></div> </td>`
+        html += `<td><div class="cell cell${i}${j}" data-i = ${i} data-j= ${j} onclick="cellClicked(this,${i}, ${j})"></div> </td>`
     } else {
         if (gBoard[i][j].isMine === true) {
-            html += `<td><div class="cell" data-i = ${i} data-j= ${j} onclick="cellClicked(this,${i}, ${j})">💣</div> </td>`
+            html += `<td><div class="cell cell-maine cell${i}${j} " data-i = ${i} data-j= ${j} onclick="cellClicked(this,${i}, ${j})">💣</div> </td>`
         } else {
             if (gBoard[i][j].minesAroundCount === 0) {
-                html += `<td><div class="cellclicked" data-i = ${i} data-j= ${j} onclick="cellClicked(this, ${i}, ${j})"></div> </td>`
+                html += `<td><div class="cell cellclicked cell${i}${j} " data-i = ${i} data-j= ${j} onclick="cellClicked(this,${i}, ${j})"></div> </td>`
 
             } else {
-                html += `<td><div class="cellclicked" data-i = ${i} data-j= ${j} onclick="cellClicked(this,${i}, ${j})"> ${gBoard[i][j].minesAroundCount}</div> </td>`
+                html += `<td><div class="cell cellclicked  cell${i}${j}" data-i = ${i} data-j= ${j} onclick="cellClicked(this,${i}, ${j})"> ${gBoard[i][j].minesAroundCount}</div> </td>`
 
             }
         }
@@ -67,10 +71,17 @@ function renderCell(i, j) {
     return html
 }
 
-function cellClicked(elCell, i, j) {
-
+function cellClicked(cell,i, j) {
     var currCell = gBoard[i][j]
-    //clickedBtnStyle(currcell, htmlCell)
+    
+
+    checkGameOver()
+    if(gGame.gameOver === true){
+        return
+    }
+
+   
+  
 
     if (gGame.isOn === false) {
         currCell.isShown = true
@@ -81,12 +92,16 @@ function cellClicked(elCell, i, j) {
 
     if (currCell.isMine === true) {
         currCell.isShown = true
-        console.log('game over')
+        gGame.Lives --
+        var elImjBtn = document.querySelector('.emoji')
+        elImjBtn.innerText = '🤯'
     } else {
-        currCell.isShown = true
+        currCell.isShown = true        
         expandShown(gBoard, i, j)
     }
     
+    shownCounter()
+    checkGameOver()
     renderBoard(gBoard)
 }
 
@@ -113,7 +128,6 @@ function setMinesNegsCount(board) {
             var rowIdx = i
             var colIdx = j
             var mainesCount = 0
-
             for (var x = rowIdx - 1; x <= rowIdx + 1; x++) {
                 if (x < 0 || x >= board.length) continue
                 for (var y = colIdx - 1; y <= colIdx + 1; y++) {
@@ -125,8 +139,6 @@ function setMinesNegsCount(board) {
             board[i][j].minesAroundCount = mainesCount
         }
     }
-    return mainesCount
-
 }
 
 function expandShown(board, i, j) {
@@ -140,14 +152,51 @@ function expandShown(board, i, j) {
 
             if (i === rowIdx && j === colIdx) continue
             if (j < 0 || j >= board[0].length) continue
-            
-            if(gBoard[i][j].isMine) continue
-            gBoard[i][j].isShown = true
+
+            if (gBoard[i][j].isMine){
+                continue
+            }else{
+                if(gBoard[i][j].minesAroundCount === 0){
+                    gBoard[i][j].isShown = true
+                }else{
+                    return
+                }
+            }
         }
     }
 }
 
-// function checkGameOver(){
-//     if(gGame.shownCount === gLevel.SIZE*gLevel.SIZE)
-// }
+function shownCounter(){
+    gGame.shownCount = 0
+    for (var i = 0; i < gBoard.length; i++) {
+        for (var j = 0; j < gBoard[0].length; j++) {
+            if(gBoard[i][j].isShown) gGame.shownCount++
+        }
+    }
+    console.log(gGame.shownCount)
+}
+
+function checkGameOver() {
+    if (gGame.shownCount === gLevel.SIZE * gLevel.SIZE && gGame.Lives > 0) {
+        gGame.gameOver = true
+        var elImjBtn = document.querySelector('.emoji')
+        elImjBtn.innerText = '😎'
+    }
+    if(gGame.Lives === 0){
+        gGame.gameOver = true
+    }
+}
+
+function lives(){
+    var hearts = ''
+    var elLives = document.querySelector('.lives')
+    for(var i = 0; i < gGame.Lives; i++){
+        hearts += '❤'
+    }
+    if(gGame.Lives === 0){
+        hearts += 'Game Over'
+        elLives.style.color = "black"
+    }
+    elLives.innerText = hearts
+}
 
