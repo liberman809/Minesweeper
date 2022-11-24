@@ -10,7 +10,8 @@ var gLevel = { SIZE: 0, MINES: 0 };
 var gGame = {Lives: 3, isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 }
 
 function onInit(SIZE, MINES) {
-    
+    var elImjBtn = document.querySelector('.emoji')
+
     gLevel.SIZE = SIZE
     gLevel.MINES = MINES
     elImjBtn.innerText ='😃'
