@@ -7,18 +7,13 @@ document.addEventListener("contextmenu", e => e.preventDefault());
 
 var gLevel = { SIZE: 0, MINES: 0 };
 
-var gGame = { gameOver: false, Lives: 3, isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 }
+var gGame = {Lives: 3, isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 }
 
 function onInit(SIZE, MINES) {
-    if(gGame.gameOver){
-        return
-    }else{
-        gGame.isOn = false
+    
     gLevel.SIZE = SIZE
     gLevel.MINES = MINES
     buildBoard()
-    }
-    
 }
 
 function buildBoard() {
@@ -47,6 +42,7 @@ function renderBoard(board) {
     }
     strHtml += '</table>'
     lives()
+    checkGameOver()
     elBoard.innerHTML = strHtml
     console.log(gBoard)
 }
@@ -79,8 +75,6 @@ function renderCell(i, j) {
 
 function cellClicked(cell,i, j) {
     
-    document.addEventListener("contextmenu", e => e.preventDefault());
-
     
     var currCell = gBoard[i][j]
     checkGameOver()
@@ -104,9 +98,7 @@ function cellClicked(cell,i, j) {
         currCell.isShown = true        
         expandShown(gBoard, i, j)
     }
-    
-    shownCounter()
-    checkGameOver()
+    gGame.shownCount++
     renderBoard(gBoard)
 }
 
@@ -163,31 +155,28 @@ function expandShown(board, i, j) {
                     continue
                 }else{
                     gBoard[i][j].isShown = true
+                    gGame.shownCount++
                 }
             }
         }
     }
 }
 
-function shownCounter(){
-    gGame.shownCount = 0
-    for (var i = 0; i < gBoard.length; i++) {
-        for (var j = 0; j < gBoard[0].length; j++) {
-            if(gBoard[i][j].isShown) gGame.shownCount++
-        }
-    }
-    console.log(gGame.shownCount)
-}
 
 function checkGameOver() {
-    if (gGame.shownCount === gLevel.SIZE * gLevel.SIZE && gGame.Lives > 0) {
-        gGame.gameOver = true
-        var elImjBtn = document.querySelector('.emoji')
+    console.log(gGame.shownCount)
+    var elImjBtn = document.querySelector('.emoji')
+    var elHearts = document.querySelector('.hearts')
+
+    if (gGame.shownCount === gLevel.SIZE * gLevel.SIZE - gGame.markedCount && gGame.markedCount === gLevel.MINES) {
         elImjBtn.innerText = '😎'
+        
     }
     if(gGame.Lives === 0){
         gGame.gameOver = true
+        elImjBtn.innerText = '🤯'
     }
+    
 }
 
 function lives(){
@@ -205,6 +194,7 @@ function lives(){
 
 function cellMarked(i,j){
     gBoard[i][j].isMarked = true
+    gGame.markedCount++
     renderBoard(gBoard)
 }
 

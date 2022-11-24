@@ -93,3 +93,10 @@ td{
     width: 165px;
     font-size: 30px;
 }
+
+.restbtn{
+    display: none;
+    width: 100px;
+    margin: auto;
+    text-align: center;
+}
