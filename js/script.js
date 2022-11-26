@@ -86,7 +86,6 @@ function renderCell(i, j) {
             html += `<td><div class="cell" oncontextmenu="cellMarked(${i}, ${j})" data-i = ${i} data-j= ${j} onclick="cellClicked(this,${i}, ${j})"></div> </td>`
         } else {
             html += `<td><div class="cell" oncontextmenu="cellMarked(${i}, ${j})" data-i = ${i} data-j= ${j} onclick="cellClicked(this,${i}, ${j})">🚩</div> </td>`
-
         }
 
     } else {
@@ -239,8 +238,8 @@ function cellMarked(i, j) {
     } else {
         gGame.markedCount--
         gBoard[i][j].isMarked = false
-
     }
+    renderBoard(gBoard)
 }
 
 
