@@ -5,6 +5,7 @@ const WIN_SOUND = new Audio('sound/win.wav')
 WIN_SOUND.play()
 
 
+
 // function createBoard() {
 //     var board = []
 
@@ -152,17 +153,17 @@ function getRandomColor() {
     return color
 }
 
-function timer(){
-    var timer = document.querySelector('.timer span')
-    var start = Date.now()
+// function timer(){
+//     var timer = document.querySelector('.timer span')
+//     var start = Date.now()
 
-    gTimerInterval = setInterval(function () {
-      var currTs = Date.now()
-      var secs = parseInt((currTs - start) / 1000)
-      var ms = (currTs - start) - secs * 1000
-      ms = '000' + ms
-      ms = ms.substring(ms.length - 2, ms.length)
+//     gTimerInterval = setInterval(function () {
+//       var currTs = Date.now()
+//       var secs = parseInt((currTs - start) / 1000)
+//       var ms = (currTs - start) - secs * 1000
+//       ms = '000' + ms
+//       ms = ms.substring(ms.length - 2, ms.length)
   
-      timer.innerText = `\n ${secs}:${ms}`
-    }, 100)
-}
+//       timer.innerText = `\n ${secs}:${ms}`
+//     }, 100)
+// }
