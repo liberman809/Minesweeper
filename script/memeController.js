@@ -175,7 +175,6 @@ function renderEditor() {
         </div>
 
         <div class="save-menu">
-        <button class="save-btn">save</button>
         <button class="save-btn"><a href="#" class="btn" onclick="onDownloadCanvas(this)"
         download="m.jpg">Download meme</a></button>
         </button>
