@@ -1,38 +1,64 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>Minesweeper</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="style/helpers.css">
+    <link rel="stylesheet" type="text/css" href="style/buttons.css">
+    <link rel="stylesheet" type="text/css" href="style/main.css">
+
+
+
 </head>
 
-<body onload="onInit(4,2)">
+<body onload="galleryInit()" dir="ltr">
 
-    <div class="timer">00:00</div>
-        
-    <div class="livesImj">            
-        <div class="emoji" onclick="onInit(4,2)"></div>
-    </div>
-
-    <div class="board"> 
-        <div class="winner">Well done! You won!</div>
-    </div>
-
-    <div class="lives">
-        <div class="hearts"></div>
-    </div>
-    
-    <div class="buttons">
-        <button class="levelbut" onclick="onInit(4,2)">Easy</button>
-        <button class="levelbut" onclick="onInit(8,14)">Medium</button> 
-        <button class="levelbut" onclick="onInit(12,32)">Hard</button> 
-    </div>
+    <section class=" grid-container">
 
 
-    <div class="foter"><span style="margin-left:30px ;margin-top:50px ">©️ Aviv Liberman</span></div>
-    <script src="js/script.js"></script>
-    <script src="js/utils.js"></script>
+        <header class="main-header">
 
+            <div class="title">
+                <a href="index.html"><h1>Meme generator</h1></a>
+            </div>
+            <div class="back-to-div display-flex">
+                <a href="index.html" class="back-to">Back to gallery</a>
+            </div>
 
+        </header>
+
+        <div class="contant">
+            <section class="gallery">
+                <div class="filltr display-flex">
+                    <input type="text" class="filter-text" onkeyup="renderGallery()">
+                </div>
+
+                <div class="memes-gallery display-flex"></div>
+
+            </section>
+
+            <section class="editor"> 
+                
+   
+                <canvas id="myCanvas" width="400" height="400"></canvas>
+
+                <div class="edit-area"></div>
+            </section>
+        </div>
+
+        <footer>
+            <div class="footer display-flex">
+                by aviv liberman
+            </div>
+        </footer>
+    </section>
+    <script src="script/memeService.js"></script>
+    <script src="script/memeController.js"></script>
+    <script src="script/galleryController.js"></script>
 </body>
 
 </html>
