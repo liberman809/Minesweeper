@@ -27,5 +27,14 @@
 }
 .back-to:hover{
     background-color: rgb(213, 217, 221);
+}
 
+.fonts{
+    width: 200px;
+    height: 30px;
+    margin: 10px;
+}
+
+.color-picer{
+    margin: 10px;
 }

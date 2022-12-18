@@ -122,8 +122,8 @@ function renderEditor() {
         <div class="stickers-menu display-flex"></div>
         
         <div class="editor-menu">
-        <div class="first-menu">
 
+        <div class="first-menu display-flex">
         <div class="line-btn">
         <h4>change line</h4>
         <button class="control-btn" onclick="onChangeLine('+')">▲</button>
@@ -140,7 +140,8 @@ function renderEditor() {
         class="img-btn"></button>
         </div>
         </div>
-        <div class="secend-menu">
+
+        <div class="secend-menu display-flex">
         <div class="x-pos">
         <h4>x position</h4>
         <button class="control-btn test" onclick="onSetNewPosition('x','-')">◄</button>
@@ -152,7 +153,8 @@ function renderEditor() {
         <button class="control-btn" onclick="onSetNewPosition('y','+')">▼</button>
         </div>
         </div>
-        <div class="third-menu">
+        
+        <div class="third-menu display-flex">
         <button class="control-btn" onclick="onChangefontSize('+')"><img
         src="icons/increase font - icon.png" class="img-btn"></button>
         <button class="control-btn" onclick="onChangefontSize('-')"><img
@@ -163,6 +165,9 @@ function renderEditor() {
         src="icons/center-text-alignment.png" class="img-btn"></button>
         <button class="control-btn" onclick="onSetAlign('end')"><img src="icons/align-to-right.png"
         class="img-btn"></button>
+        </div>
+
+        <div class="fifth-menu display-flex">
         <select name="fonts" class="fonts" onchange="onSetFont()">
         <option value="Impact">Impact</option>
         <option value="Brush Script MT">Brush Script MT</option>
@@ -174,7 +179,7 @@ function renderEditor() {
         <input type="color" class="color-picer" onchange="onSetColor()">
         </div>
 
-        <div class="save-menu">
+        <div class="save-menu display-flex">
         <button class="save-btn"><a href="#" class="btn" onclick="onDownloadCanvas(this)"
         download="m.jpg">Download meme</a></button>
         </button>
