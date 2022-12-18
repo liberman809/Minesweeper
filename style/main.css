@@ -271,7 +271,8 @@ a:visited {
 
     .main-header {
         justify-content: space-between;
-=    }
+        background-color: aqua;
+    }
 
     .title {
         margin-left: 2%;
@@ -285,7 +286,7 @@ a:visited {
         gap: 1rem;
         align-items: center;
         min-width: 70vw;
-        margin-top: 25em;
+        margin-top: 30em;
         margin-bottom: 30%;
         box-sizing: border-box;
     }
@@ -305,4 +306,60 @@ a:visited {
         display: none;
     }
 
+}
+
+@media screen and (max-width: 400px) {
+
+    html {
+        font-size: 8px;
+    }
+
+    .back-to-div {
+        margin-right: .5rem;
+        height: 3rem;
+    }
+    .back-to{
+        font-size: 2rem;
+        height: 100%;
+        width: 150px;
+    }
+
+    .main-header {
+        justify-content: space-between;
+        background-color: rgb(255, 8, 0);
+    }
+
+    .title {
+        margin-left: 2%;
+        color: azure;
+
+    }
+
+
+    .editor {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        min-width: 70vw;
+        margin-top: 34em;
+        margin-bottom: 30%;
+        box-sizing: border-box;
+    }
+
+    .edit-area {
+        min-height: 86%;
+        min-width: 80%;
+    }
+
+    canvas {
+        min-height: 80%;
+        min-width: 80%;
+
+    }
+
+    .footer {
+        display: none;
+    }
+
+}
 }
